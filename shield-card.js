@@ -29,6 +29,7 @@ mdiMenu,
 mdiRemote,
 mdiHulu,
 mdiPlex,
+mdiKeyboard,
 } from "https://unpkg.com/@mdi/js@6.4.95/mdi.js?module"
 
 // Taken from mdi v5.9.55
@@ -126,7 +127,7 @@ class TVCardServices extends LitElement {
           }
                  
           ${
-            this._config.back || this._config.home || this._config.menu
+            this._config.back || this._config.home || this._config.menu || this._config.text
               ? html`
                   <div class="row">
                     ${this._config.back
@@ -159,6 +160,17 @@ class TVCardServices extends LitElement {
                             icon="mdi:menu"
                             .path=${mdiMenu}
                             title="Menu"
+                          ></ha-icon-button>
+                        `
+                      : emptyButton}
+                      ${this._config.text
+                      ? html`
+                          <ha-icon-button
+                            .action="${"text"}"
+                            @click="${this.handleActionClick}"
+                            icon="mdi:keyboard"
+                            .path=${mdiKeyboard}
+                            title="Text"
                           ></ha-icon-button>
                         `
                       : emptyButton}
@@ -445,6 +457,7 @@ class TVCardServices extends LitElement {
       "finder",
       "plex",
       "hulu",
+      "text",
     ];
 
     if (
